@@ -6,10 +6,9 @@ android {
     compileSdkVersion 27
 
 
-    def siteUrl = 'https://github.com/yanzhenjie/AndServer' // 项目主页。
-    def gitUrl = 'git@github.com:yanzhenjie/AndServer.git' // Git仓库的url。
+    def siteUrl = 'https://github.com/DongAndroid/AES' // 项目主页。
+    def gitUrl = 'https://github.com/DongAndroid/AES.git' // Git仓库的url。
     group = "com.lhd.mutils"
-
 
     install {
         repositories.mavenInstaller {
