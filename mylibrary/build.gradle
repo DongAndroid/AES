@@ -9,7 +9,7 @@ android {
     def siteUrl = 'https://github.com/DongAndroid/AES' // 项目主页。
     def gitUrl = 'https://github.com/DongAndroid/AES.git' // Git仓库的url。
     group = "com.lhd.mutils"
-
+//更新了
     install {
         repositories.mavenInstaller {
             // 生成pom.xml和参数
