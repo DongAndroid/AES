@@ -9,7 +9,6 @@ import com.lhd.mutils.utils.DeviceInfoUtil;
 import com.lhd.mutils.utils.DisplayUtil;
 import com.lhd.mutils.utils.ImageUtil;
 import com.lhd.mutils.utils.Md5Util;
-import com.orhanobut.hawk.Hawk;
 
 /*******************************************
  * 作者： 刘海东
