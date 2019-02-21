@@ -26,6 +26,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url "https://jitpack.io" }
     }
     //加上这些
     tasks.withType(Javadoc) {
@@ -38,4 +39,14 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+ext {
+    a=[
+            applicationId    : "com.yto.netclient.testt",
+            compileSdkVersion: 27,
+            minSdkVersion    : 19,
+            targetSdkVersion : 27,
+            versionCode      : 5,
+            versionName      : "1.5"
+    ]
 }
