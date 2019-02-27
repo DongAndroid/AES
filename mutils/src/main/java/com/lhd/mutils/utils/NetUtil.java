@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +16,21 @@ import java.util.regex.Pattern;
  ********************************************
  */
 public class NetUtil {
+    private static volatile NetUtil netUtil;
+    private NetUtil() {
+    }
+
+    public static NetUtil getInstance() {
+        if (netUtil == null) {
+            synchronized (DisplayUtil.class) {
+                if (netUtil == null) {
+                    netUtil = new NetUtil();
+                }
+            }
+        }
+
+        return netUtil;
+    }
     // 没有网络
     public static final int NETWORN_NONE = 0;
     // wifi信号

@@ -9,6 +9,7 @@ import com.lhd.mutils.utils.DeviceInfoUtil;
 import com.lhd.mutils.utils.DisplayUtil;
 import com.lhd.mutils.utils.ImageUtil;
 import com.lhd.mutils.utils.Md5Util;
+import com.lhd.mutils.utils.NetUtil;
 import com.lhd.mutils.utils.NumberUtil;
 
 /*******************************************
@@ -31,7 +32,7 @@ public class MUtils {
     public static DisplayUtil displayUtil=DisplayUtil.getInstance();
     public static AppUtil appUtil=AppUtil.getInstance();
     public static NumberUtil numberUtil=NumberUtil.getInstance();
-
+    public static NetUtil netUtil=NetUtil.getInstance();
     public static void main(String[] s){
 
 
