@@ -1,5 +1,6 @@
 package com.lhd.mutils.utils;
 
+import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -32,13 +33,13 @@ public class NetUtil {
         return netUtil;
     }
     // 没有网络
-    public static final int NETWORN_NONE = 0;
+    public  final int NETWORN_NONE = 0;
     // wifi信号
-    public static final int NETWORN_WIFI = 1;
+    public  final int NETWORN_WIFI = 1;
     // 3G信号
-    public static final int NETWORN_MOBILE = 2;
+    public  final int NETWORN_MOBILE = 2;
 
-    private static final Pattern PATTERN = Pattern.compile("^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)[/\\?\\:]?.*$", Pattern.CASE_INSENSITIVE);
+    private  final Pattern PATTERN = Pattern.compile("^(http://|https://)?((?:[A-Za-z0-9]+-[A-Za-z0-9]+|[A-Za-z0-9]+)\\.)+([A-Za-z]+)[/\\?\\:]?.*$", Pattern.CASE_INSENSITIVE);
 
     /**
      * 网络链接状况
@@ -46,7 +47,7 @@ public class NetUtil {
      * @param context
      * @return
      */
-    public static int getNetworkState(Context context) {
+    public  int getNetworkState(Context context) {
         ConnectivityManager connManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -68,7 +69,7 @@ public class NetUtil {
     /**
      * 检测网络是否连接
      */
-    public static boolean isNetConnected(Context context) {
+    public  boolean isNetConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
             NetworkInfo[] infos = cm.getAllNetworkInfo();
@@ -86,7 +87,7 @@ public class NetUtil {
     /**
      * 检测wifi是否连接
      */
-    public static boolean isWifiConnected(Context context) {
+    public  boolean isWifiConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -100,7 +101,7 @@ public class NetUtil {
     /**
      * 检测3G是否连接
      */
-    public static boolean is3gConnected(Context context) {
+    public  boolean is3gConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm != null) {
             NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -114,7 +115,7 @@ public class NetUtil {
     /**
      * 判断网址是否有效
      */
-    public static boolean isLinkAvailable(String link) {
+    public  boolean isLinkAvailable(String link) {
 
         Matcher matcher = PATTERN.matcher(link);
         if (matcher.matches()) {
@@ -129,7 +130,7 @@ public class NetUtil {
      * @param ipInt
      * @return
      */
-    private static String int2ip(int ipInt) {
+    private  String int2ip(int ipInt) {
         StringBuilder sb = new StringBuilder();
         sb.append(ipInt & 0xFF).append(".");
         sb.append((ipInt >> 8) & 0xFF).append(".");
@@ -144,7 +145,7 @@ public class NetUtil {
      * @param context
      * @return
      */
-    public static String getLocalIpAddress(Context context) {
+    public  String getLocalIpAddress(Context context) {
         try {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext()
                     .getSystemService(Context.WIFI_SERVICE);
