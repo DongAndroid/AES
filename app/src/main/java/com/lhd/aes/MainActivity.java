@@ -2,6 +2,7 @@ package com.lhd.aes;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("utils测试",MUtils.numberUtil.formatBigDecimal(2.1,50)) ;
+        Log.e("utils测试",MUtils.numberUtil.formatBigDecimal("2.1",20)) ;
         setContentView(R.layout.activity_main);
         lv=findViewById(R.id.lv);
         view=findViewById(R.id.v);
-bt=findViewById(R.id.bt);
+        bt=findViewById(R.id.bt);
         mTextView=findViewById(R.id.tv1);
-       width=MUtils.displayUtil.getViewWidth(findViewById(R.id.bt));
+        width=MUtils.displayUtil.getViewWidth(findViewById(R.id.bt));
 
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -80,7 +83,7 @@ bt=findViewById(R.id.bt);
                         }else{
                             hs.smoothScrollTo(0,0);
                         }
-                       return true;
+                        return true;
                 }
 
 
@@ -112,5 +115,5 @@ bt=findViewById(R.id.bt);
         width=findViewById(R.id.bt).getWidth();
 
         hs.smoothScrollBy(-MUtils.displayUtil.getViewWidth(findViewById(R.id.tv)),0);
-    }
-}
+        }
+        }
