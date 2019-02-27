@@ -9,6 +9,7 @@ import com.lhd.mutils.utils.DeviceInfoUtil;
 import com.lhd.mutils.utils.DisplayUtil;
 import com.lhd.mutils.utils.ImageUtil;
 import com.lhd.mutils.utils.Md5Util;
+import com.lhd.mutils.utils.NumberUtil;
 
 /*******************************************
  * 作者： 刘海东
@@ -29,15 +30,12 @@ public class MUtils {
     public static DeviceInfoUtil deviceInfoUtil=DeviceInfoUtil.getInstance();
     public static DisplayUtil displayUtil=DisplayUtil.getInstance();
     public static AppUtil appUtil=AppUtil.getInstance();
-    static String str;
-    public static void main(String s[]){
+    public static NumberUtil numberUtil=NumberUtil.getInstance();
 
-        //String str=println(aesUtil.encrypt("123","123","123"));
-        // println(aesUtil.decrypt(str,"123","123"));
-        //str= println(base64Util.strToBase64("123"));
-        //println(base64Util.base64ToStr(str));
-        println(md5Util.encode("123"));
+    public static void main(String[] s){
 
+
+        println(numberUtil.format(123.123,"#00"));
 
     }
     private static String println(String str){
