@@ -8,6 +8,7 @@ import android.util.Base64;
 import com.lhd.mutils.MUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 

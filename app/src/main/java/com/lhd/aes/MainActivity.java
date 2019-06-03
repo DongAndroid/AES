@@ -15,7 +15,7 @@ import com.lhd.mutils.MUtils;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    MTextView mTextView;
+
     Animation animation;
     Animation animation1;
     View view;
@@ -33,14 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lv=findViewById(R.id.lv);
         view=findViewById(R.id.v);
         bt=findViewById(R.id.bt);
-        mTextView=findViewById(R.id.tv1);
         width=MUtils.displayUtil.getViewWidth(findViewById(R.id.bt));
 
         int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        mTextView.measure(w, h);
 
-        width=mTextView.getMeasuredWidth();
        /* mTextView.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
 
