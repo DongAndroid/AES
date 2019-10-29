@@ -7,6 +7,7 @@ import com.lhd.mutils.utils.ByteUtils;
 import com.lhd.mutils.utils.DateUtil;
 import com.lhd.mutils.utils.DeviceInfoUtil;
 import com.lhd.mutils.utils.DisplayUtil;
+import com.lhd.mutils.utils.FileUtil;
 import com.lhd.mutils.utils.ImageUtil;
 import com.lhd.mutils.utils.Md5Util;
 import com.lhd.mutils.utils.NetUtil;
@@ -35,6 +36,7 @@ public class MUtils {
     public static NumberUtil numberUtil=NumberUtil.getInstance();
     public static PhoneUtils phoneUtils=PhoneUtils.getInstance();
     public static NetUtil netUtil=NetUtil.getInstance();
+    public static FileUtil fileUtil=FileUtil.getInstance();
     public static void main(String[] s){
 
 

@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.text.TextUtils;
+import android.util.Half;
 import android.util.Log;
 
 import java.io.BufferedOutputStream;
@@ -16,7 +17,7 @@ import java.io.IOException;
  * 作者： 刘海东
  * 时间： 2019/2/13
  * 类名：com.lhd.mutils.utils.ImageUtil
- * 说明：
+ * 说明：图片相关操作
  ********************************************
  */
 public class ImageUtil {
@@ -33,48 +34,76 @@ public class ImageUtil {
         return imageUtil;
     }
     /**
-     * 从path读取图片，默认压缩
+     * 从path读取图片，
      * */
     public Bitmap getBitmpa(String src){
 
         return getBitmpa(src,0);
     }
     /**
-     * 从path读取图片，默认压缩
-     * */
+     * 从path读取图片，指定压缩比例
+     * * */
     public Bitmap getBitmpa(String src,int inSampleSize){
         File file=new File(src);
-        return getBitmpa(file,inSampleSize);
+        return getBitmpa(file,inSampleSize,0,0);
     }
     /**
-     * 从file读取图片，默认压缩
+     * 从path读取图片，按尺寸压缩
+     * * */
+    public Bitmap getBitmpa(String src,int w ,int h){
+        File file=new File(src);
+        return getBitmpa(file,0,w,h);
+    }
+    /**
+     * 从file读取图片
      * */
     public Bitmap getBitmpa(File file) {
-        return   getBitmpa(file, 0);
+        return   getBitmpa(file, 0,0,0);
 
     }
     /**
-     * 从file读取图片,不指定压缩时默认压缩
+     * 从file读取图片，根据比例压缩
      * */
-    public Bitmap getBitmpa(File file,int inSampleSize){
+    public Bitmap getBitmpa(File file,int inSampleSize) {
+        return   getBitmpa(file, inSampleSize,0,0);
+
+    }
+    /**
+     * 从file读取图片，根据尺寸压缩
+     * */
+    public Bitmap getBitmpa(File file,int w,int h) {
+        return   getBitmpa(file, 0,w,h);
+
+    }
+    /**
+     * 从file读取图片,不指定压缩时默认压缩,比例优先
+     * */
+    public Bitmap getBitmpa(File file,int inSampleSize,int w,int h){
         try{
+            if(!file.exists()){
+                return null;
+            }
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inJustDecodeBounds = false;
             if(inSampleSize>0){
                 options.inSampleSize=inSampleSize;
+                Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
+                options = null;
+                return bmp;
             }else{
-                if(file.length()>512*1024){
-                    options.inSampleSize = 2;
-                }else if (file.length()>1024*1024){
-                    options.inSampleSize = 4;
-                }else if (file.length()>2048*1024){
-                    options.inSampleSize = 8;
+                BitmapFactory.Options tempOptions = new BitmapFactory.Options();
+                tempOptions.inJustDecodeBounds=true;
+                Bitmap tempBm = BitmapFactory.decodeFile(file.getPath(), tempOptions);
+                if(tempOptions.outWidth>tempOptions.outHeight){
+                    options.inSampleSize=tempOptions.outWidth/w;
+                }else {
+                    options.inSampleSize=tempOptions.outHeight/h;
                 }
+                Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
+                options = null;
+                tempBm=null;
+                return bmp;
             }
-            Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
-            options = null;
-            return bmp;
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -138,30 +167,20 @@ public class ImageUtil {
         return returnBm;
     }
     /**
-     * 压缩图片
+     * 按比例压缩图片
      */
-    public  Bitmap getCompressPhoto(String path) {
-        if(TextUtils.isEmpty(path)){
-            return null;
-        }
-        File f=new File(path);
-        if(!f.exists()){
-            return null;
-        }
+    public  Bitmap getCompressPhoto(Bitmap bitmap,int inSampleSize) {
+        Matrix matrix = new Matrix();
+        matrix.setScale(inSampleSize, inSampleSize);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+                bitmap.getHeight(), matrix, true);
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = false;
-        if(f.length()>512*1024){
-            options.inSampleSize = 2;
-        }else if (f.length()>1024*1024){
-            options.inSampleSize = 4;
-        }else if (f.length()>2048*1024){
-            options.inSampleSize = 8;
-        }
-        Bitmap bmp = BitmapFactory.decodeFile(path, options);
-        options = null;
-
-        return bmp;
+    }
+    /**
+     * 按尺寸压缩图片
+     */
+    public  Bitmap getCompressPhoto(Bitmap bitmap, int w, int h) {
+        return Bitmap.createScaledBitmap(bitmap, w, h*(bitmap.getWidth()/w), true);
 
     }
     /*bitmap保存文件*/
