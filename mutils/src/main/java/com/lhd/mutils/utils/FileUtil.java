@@ -90,6 +90,12 @@ public class FileUtil {
             file.mkdirs();
         }
     }
+    public void delFile(String path){
+        File file=new File(path);
+        if(file.exists()){
+            file.delete();
+        }
+    }
     public boolean mkdirsAndFile(String path){
         try{
             File file=new File(path);
