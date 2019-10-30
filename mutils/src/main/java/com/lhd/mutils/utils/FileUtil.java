@@ -82,10 +82,7 @@ public class FileUtil {
     }
     public void mkdirs(String path){
         File file=new File(path);
-        if(file.isFile()||!file.getParentFile().exists()){
-            file.getParentFile().mkdirs();
-            return;
-        }
+
         if(!file.exists()){
             file.mkdirs();
         }
@@ -96,7 +93,7 @@ public class FileUtil {
             file.delete();
         }
     }
-    public boolean mkdirsAndFile(String path){
+    public boolean creatFile(String path){
         try{
             File file=new File(path);
             if(!file.getParentFile().exists()){

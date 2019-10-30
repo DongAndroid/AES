@@ -1,5 +1,8 @@
 package com.lhd.aes;
 
+import android.Manifest;
+import android.graphics.Bitmap;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,108 +12,43 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.lhd.mutils.MUtils;
 
+import java.io.File;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Animation animation;
-    Animation animation1;
-    View view;
+public class MainActivity extends AppCompatActivity{
+
     Button bt;
-    LinearLayout lv;
-    HorizontalScrollView hs;
-    Animation.AnimationListener animationListener;
-    int width;
+    ImageView img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("utils测试",MUtils.numberUtil.formatBigDecimal(2.1,50)) ;
-        Log.e("utils测试",MUtils.numberUtil.formatBigDecimal("2.1",20)) ;
         setContentView(R.layout.activity_main);
-        lv=findViewById(R.id.lv);
-        view=findViewById(R.id.v);
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                200);
         bt=findViewById(R.id.bt);
-        width=MUtils.displayUtil.getViewWidth(findViewById(R.id.bt));
-
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-
-       /* mTextView.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-
-                    @Override
-                    public boolean onPreDraw() {
-                        mTextView.getViewTreeObserver().removeOnPreDrawListener(this);
-                        width= mTextView.getWidth(); // 获取宽度
-                        mTextView.getHeight(); // 获取高度
-                        return true;
-                    }
-                });
-*/
-
-        ViewGroup.LayoutParams layoutParams=lv.getLayoutParams();
-        layoutParams.width=MUtils.displayUtil.getScreenWidth(this);
-        lv.setLayoutParams(layoutParams);
-
-        ViewGroup.LayoutParams layoutParams1=view.getLayoutParams();
-        layoutParams1.width=width;
-        view.setLayoutParams(layoutParams1);
-
-        hs=findViewById(R.id.hs);
-
-        hs.setOnTouchListener(new View.OnTouchListener() {
-            float downX=0;
+        img=findViewById(R.id.img);
+        bt.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
 
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        downX=event.getX();
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        if(event.getX()-downX<0){
-                            hs.smoothScrollTo(width*2,0);
-                        }else{
-                            hs.smoothScrollTo(0,0);
-                        }
-                        return true;
-                }
-
-
-
-
-
-
-
-
-
-                return false;
+                MUtils.fileUtil.mkdirs(MUtils.fileUtil.getExternalStorageDirectory()+File.separator+"123");
+                Bitmap bitmap= MUtils.imageUtil.getBitmpa(
+                        MUtils.fileUtil.getExternalStorageDirectory()+ File.separator+"123"+File.separator+"123.png",
+                        1);
+                img.setImageBitmap(bitmap);
+                MUtils.imageUtil.saveBitmapFile(bitmap,
+                        MUtils.fileUtil.getExternalStorageDirectory()+File.separator+"123456"+File.separator+"456.jpg");
             }
         });
 
-
     }
 
-    @Override
-    public void onClick(View v) {
-        // mTextView.scrollBy(300,0);
-        // ((ViewGroup)mTextView.getParent()).setScrollX(1000);
-        //  mTextView.startAnimation(animation);
-        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        bt.measure(w, h);
 
-        width=bt.getMeasuredWidth();
-        width=MUtils.displayUtil.getViewWidth(findViewById(R.id.bt));
-        width=findViewById(R.id.bt).getWidth();
-
-        hs.smoothScrollBy(-MUtils.displayUtil.getViewWidth(findViewById(R.id.tv)),0);
-        }
-        }
+}

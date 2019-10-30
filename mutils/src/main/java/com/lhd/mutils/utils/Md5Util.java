@@ -1,6 +1,5 @@
 package com.lhd.mutils.utils;
 
-import android.content.res.Resources;
 
 import java.io.File;
 import java.io.FileInputStream;

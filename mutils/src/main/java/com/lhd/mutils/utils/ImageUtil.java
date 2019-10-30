@@ -90,6 +90,11 @@ public class ImageUtil {
                 Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
                 options = null;
                 return bmp;
+            }else if(w==0||h==0) {
+                options.inSampleSize=1;
+                Bitmap bmp = BitmapFactory.decodeFile(file.getPath(), options);
+                options = null;
+                return bmp;
             }else{
                 BitmapFactory.Options tempOptions = new BitmapFactory.Options();
                 tempOptions.inJustDecodeBounds=true;
@@ -104,6 +109,7 @@ public class ImageUtil {
                 tempBm=null;
                 return bmp;
             }
+
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -185,13 +191,12 @@ public class ImageUtil {
     }
     /*bitmap保存文件*/
     public  File saveBitmapFile(Bitmap bitmap, String path) {
-        File tempFile = new File(path);//
-        if(tempFile!=null){
-//            System.out.println(tempFile.getPath());
-            Log.e("haha",tempFile.getPath());
-        }
+        File tempFile = new File(path);
         try {
 
+            if (!tempFile.getParentFile().exists()) {
+                tempFile.getParentFile().mkdirs();
+            }
             BufferedOutputStream bos = new BufferedOutputStream(
                     new FileOutputStream(tempFile));
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
@@ -199,7 +204,6 @@ public class ImageUtil {
             bos.close();
         } catch (IOException e) {
             e.printStackTrace();
-
         }
         return tempFile;
 
